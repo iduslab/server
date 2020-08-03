@@ -73,12 +73,9 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	list := strings.Split(m.Content, " ")
 	command := string([]rune(list[0])[1:])
 	var args []string
-	fmt.Println(len(list))
 	if len(list) > 1 {
 		args = list[1:]
 	}
-
-	fmt.Println(list)
 
 	switch command {
 	case "상자추가":

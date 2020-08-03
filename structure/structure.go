@@ -1,5 +1,7 @@
 package structure
 
+import "time"
+
 // Structure of config.json
 type Config struct {
 	Token   string `json:"token"`
@@ -9,14 +11,16 @@ type Config struct {
 
 // Structure of IdeaNote
 type Note struct {
-	BoxNum     int
-	Author     string
-	AuthorName string
-	text       string
+	BoxNum     int       `gorm:"not null;"`
+	Author     string    `gorm:"not null;type:varchar(30)"`
+	AuthorName string    `gorm:"type:varchar(70);not null"`
+	text       string    `gorm:"type:varchar(100);not null"`
+	Timestamp  time.Time `gorm:"not null"`
 }
 
 // Structure of Idea Box
 type Box struct {
-	ID   int
-	Text string
+	ID        int       `gorm:"not null"`
+	Text      string    `gorm:"type:varchar(50);"`
+	Timestamp time.Time `gorm:"not null"`
 }

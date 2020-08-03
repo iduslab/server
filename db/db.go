@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/gangjun06/bot01/structure"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
@@ -19,6 +20,10 @@ func Init() {
 
 	db = connection
 	fmt.Println("Successful to Connect database")
+
+	var models = []interface{}{&structure.Box{}, &structure.Note{}}
+	connection.AutoMigrate(models...)
+	fmt.Println("Successfully performed AutoMigrate")
 }
 
 func CloseDB() {
