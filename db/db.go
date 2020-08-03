@@ -20,3 +20,7 @@ func Init() {
 	db = connection
 	fmt.Println("Successful to Connect database")
 }
+
+func CloseDB() {
+	db.Close()
+}

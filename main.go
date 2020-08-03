@@ -5,21 +5,28 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 
 	"github.com/bwmarrin/discordgo"
+	"github.com/gangjun06/bot01/commands"
 	"github.com/gangjun06/bot01/db"
 	"github.com/gangjun06/bot01/utils"
 )
 
+var prefix string
+
 func main() {
 
 	go db.Init()
+	defer db.CloseDB()
+
 	config, loadConfigErr := utils.LoadConfig()
 	if loadConfigErr != nil {
 		log.Fatalln("Error While Loading Config File.\nMake sure config.json is located in the project root and written correctly." + loadConfigErr.Error())
 		return
 	}
+	prefix = config.Prefix
 
 	dg, err := discordgo.New("Bot " + config.Token)
 	if err != nil {
@@ -52,15 +59,29 @@ func main() {
 
 func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
-	if m.Author.ID == s.State.User.ID {
+	// 봇이면 무시하기
+	if m.Author.Bot == true {
 		return
 	}
 
-	if m.Content == "ping" {
-		s.ChannelMessageSend(m.ChannelID, "Pong!")
+	// 프리픽스 안맞으면 무시하기
+	if !strings.HasPrefix(m.Content, prefix) {
+		return
 	}
 
-	if m.Content == "pong" {
-		s.ChannelMessageSend(m.ChannelID, "Ping!")
+	// 채팅 파싱
+	list := strings.Split(m.Content, " ")
+	command := string([]rune(list[0])[1:])
+	var args []string
+	fmt.Println(len(list))
+	if len(list) > 1 {
+		args = list[1:]
+	}
+
+	fmt.Println(list)
+
+	switch command {
+	case "상자추가":
+		commands.AddBox(s, m, args)
 	}
 }
