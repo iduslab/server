@@ -29,3 +29,14 @@ func Init() {
 func CloseDB() {
 	db.Close()
 }
+
+func AddBox(text string) error {
+	result := db.Create(&structure.Box{Text: text})
+	return result.Error
+}
+
+func GetAllBox() (data []structure.Box, err error) {
+	result := db.Where("").Find(&data)
+	err = result.Error
+	return
+}

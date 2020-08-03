@@ -80,5 +80,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	switch command {
 	case "상자추가":
 		commands.AddBox(s, m, args)
+	case "상자목록":
+		commands.ShowBoxList(s, m, args)
 	}
 }
