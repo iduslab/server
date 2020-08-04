@@ -3,6 +3,7 @@ package db
 import (
 	"fmt"
 	"log"
+	"time"
 
 	"github.com/gangjun06/bot01/structure"
 	"github.com/jinzhu/gorm"
@@ -30,8 +31,8 @@ func CloseDB() {
 	db.Close()
 }
 
-func AddBox(text string) error {
-	result := db.Create(&structure.Box{Text: text})
+func AddBox(text, description string) error {
+	result := db.Create(&structure.Box{Text: text, Description: description, Timestamp: time.Now()})
 	return result.Error
 }
 
@@ -48,7 +49,7 @@ func GetBox(id int) (data structure.Box, err error) {
 }
 
 func AddMemo(box int, userid string, anon bool, text string) error {
-	result := db.Create(&structure.Note{BoxNum: box, Author: userid, Anon: anon, Text: text})
+	result := db.Create(&structure.Note{BoxNum: box, Author: userid, Anon: anon, Text: text, Timestamp: time.Now()})
 	return result.Error
 }
 

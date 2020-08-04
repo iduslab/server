@@ -19,7 +19,7 @@ func ShowBoxList(s *discordgo.Session, m *discordgo.MessageCreate, args []string
 		return
 	}
 	for _, item := range data {
-		embed.AddListField(strconv.Itoa(item.ID), item.Text, false)
+		embed.AddListField(strconv.Itoa(item.ID)+"."+item.Text, item.Description+" - 생성일: "+item.Timestamp.Format("2006년 01월 02일"), false)
 	}
 
 	embed.SendEmbed(embedUtil.WITH_LIST, "등록된 상자 목록을 보여줍니다")

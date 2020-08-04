@@ -25,9 +25,10 @@ type Note struct {
 }
 
 type Box struct {
-	ID        int       `gorm:"not null"`
-	Text      string    `gorm:"type:varchar(50);"`
-	Timestamp time.Time `gorm:"not null"`
+	ID          int       `gorm:"not null"`
+	Text        string    `gorm:"type:varchar(50);"`
+	Description string    `gorm:"type:varchar(300)"`
+	Timestamp   time.Time `gorm:"not null"`
 }
 
 type DiscordUser struct {

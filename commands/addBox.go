@@ -21,18 +21,20 @@ func AddBox(s *discordgo.Session, m *discordgo.MessageCreate, args []string) {
 		return
 	}
 
-	if len(args) < 1 {
-		embed.SendEmbed(embedUtil.ERR_REQUEST, "상자의 이름을 적어주세요")
+	if len(args) < 2 {
+		embed.SendEmbed(embedUtil.ERR_REQUEST, "상자의 이름/설명을 적어주세요")
 		return
 	}
 
-	text := strings.Join(args, " ")
+	text := args[0]
 	if len(text) > 25 {
 		embed.SendEmbed(embedUtil.ERR_REQUEST, "이름을 20글자 아래로 적어주세요.")
 		return
 	}
 
-	err := db.AddBox(text)
+	description := strings.Join(args[1:], " ")
+
+	err := db.AddBox(text, description)
 	if err != nil {
 		embed.SendEmbed(embedUtil.ERR_BOT, "추가도중 에러가 발생하였습니다")
 		return
