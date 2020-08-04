@@ -24,3 +24,11 @@ type Box struct {
 	Text      string    `gorm:"type:varchar(50);"`
 	Timestamp time.Time `gorm:"not null"`
 }
+
+type DiscordUser struct {
+	ID            string `json:"id"`
+	Username      string `json:"username"`
+	Avatar        string `json:"avatar"`
+	Discriminator string `json:"discriminator"`
+	PublicFlags   string `json:"public_flags"`
+}

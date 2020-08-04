@@ -3,6 +3,8 @@ package commands
 import (
 	"strconv"
 
+	"github.com/gangjun06/bot01/utils"
+
 	"github.com/bwmarrin/discordgo"
 	"github.com/gangjun06/bot01/db"
 )
@@ -21,7 +23,7 @@ func PickMemo(s *discordgo.Session, m *discordgo.MessageCreate, args []string) {
 		return
 	}
 
-	count = 2
+	count := 2
 	if len(args) > 1 {
 		num, err := strconv.Atoi(args[1])
 		if err != nil {
@@ -31,7 +33,9 @@ func PickMemo(s *discordgo.Session, m *discordgo.MessageCreate, args []string) {
 		count = num
 	}
 
-	if _, err := db.GetBox(boxID); err != nil {
+	boxData, err := db.GetBox(boxID)
+
+	if err != nil {
 		s.ChannelMessageSend(m.ChannelID, "id와 일치하는 상자가 존재하지 않습니다")
 		return
 	}
@@ -44,14 +48,25 @@ func PickMemo(s *discordgo.Session, m *discordgo.MessageCreate, args []string) {
 
 	embed := &discordgo.MessageEmbed{
 		Title:       "상자열기",
-		Description: args[0] + "번 상자에 든 쪽지를 " + strconv.Itoa(len(notes)) + "개 가져왔습니다",
+		Description: args[0] + "번 상자(" + boxData.Text + ")에 든 쪽지를 " + strconv.Itoa(len(notes)) + "개 가져왔습니다",
 	}
 
 	var fields []*discordgo.MessageEmbedField
 
 	for i, item := range notes {
+		var author string
+		if item.Anon {
+			author = "익명"
+		} else {
+			user, err := utils.GetUserInfoByUserId(item.Author)
+			if err != nil {
+				s.ChannelMessageSend(m.ChannelID, "불러오는도중 에러가 발생하였습니다")
+				return
+			}
+			author = user.Username + "#" + user.Discriminator
+		}
 		field := new(discordgo.MessageEmbedField)
-		field.Name = strconv.Itoa(i + 1)
+		field.Name = strconv.Itoa(i+1) + ". 작성자: " + author
 		field.Inline = true
 		field.Value = item.Text
 		fields = append(fields, field)
