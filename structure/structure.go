@@ -1,6 +1,8 @@
 package structure
 
-import "time"
+import (
+	"time"
+)
 
 // Structure of config.json
 type Config struct {
