@@ -31,6 +31,8 @@ config.json폴더를 만들어서 다음과 같이 입력합니다
 ```bash
 # 실행파일로 만들기
 go build main.go
+# 라즈베리파이4 용으로 빌드
+env GOOS=linux GOARCH=arm GOARM=7 CC=arm-linux-gnueabi-gcc CGO_ENABLED=1 go build
 ```
 
 이제 실행파일을 실행하면 됩니다!<br />

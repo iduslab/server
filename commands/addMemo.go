@@ -48,6 +48,8 @@ func AddMemo(s *discordgo.Session, m *discordgo.MessageCreate, args []string) {
 		return
 	}
 
+	s.ChannelMessageDelete(m.ChannelID, m.ID)
+
 	if _, err := db.GetBox(boxID); err != nil {
 		embed.SendEmbed(embedUtil.ERR_REQUEST, "id와 일치하는 상자가 존재하지 않습니다")
 		return
@@ -57,5 +59,6 @@ func AddMemo(s *discordgo.Session, m *discordgo.MessageCreate, args []string) {
 		embed.SendEmbed(embedUtil.ERR_BOT, "추가도중 에러가 발생하였습니다")
 		return
 	}
-	embed.SendEmbed(embedUtil.ONLY_TEXT, "성공적으로 추가되었습니다.")
+
+	embed.SendEmbed(embedUtil.ONLY_TEXT, m.Author.Username+"님의 쪽지가 성공적으로 추가되었습니다.")
 }
