@@ -11,11 +11,11 @@ type Config struct {
 
 // Structure of IdeaNote
 type Note struct {
-	BoxNum     int       `gorm:"not null;"`
-	Author     string    `gorm:"not null;type:varchar(30)"`
-	AuthorName string    `gorm:"type:varchar(70);not null"`
-	text       string    `gorm:"type:varchar(100);not null"`
-	Timestamp  time.Time `gorm:"not null"`
+	BoxNum    int    `gorm:"not null;"`
+	Author    string `gorm:"not null;type:varchar(30)"`
+	Text      string `gorm:"type:varchar(100);not null"`
+	Anon      bool
+	Timestamp time.Time `gorm:"not null"`
 }
 
 // Structure of Idea Box

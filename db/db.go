@@ -40,3 +40,20 @@ func GetAllBox() (data []structure.Box, err error) {
 	err = result.Error
 	return
 }
+
+func GetBox(id int) (data structure.Box, err error) {
+	result := db.Where("id = ?", id).First(&data)
+	err = result.Error
+	return
+}
+
+func AddMemo(box int, userid string, anon bool, text string) error {
+	result := db.Create(&structure.Note{BoxNum: box, Author: userid, Anon: anon, Text: text})
+	return result.Error
+}
+
+func PickMemo(box, count int) (data []structure.Note, err error) {
+	result := db.Where("box_num = ?", box).Order("RANDOM()").Limit(count).Find(&data)
+	err = result.Error
+	return
+}

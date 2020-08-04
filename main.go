@@ -82,5 +82,9 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		commands.AddBox(s, m, args)
 	case "상자목록":
 		commands.ShowBoxList(s, m, args)
+	case "쪽지추가":
+		commands.AddMemo(s, m, args)
+	case "상자열기":
+		commands.PickMemo(s, m, args)
 	}
 }
