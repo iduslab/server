@@ -4,14 +4,18 @@ import (
 	"time"
 )
 
-// Structure of config.json
 type Config struct {
 	Token   string `json:"token"`
 	OwnerID string `json:"ownerID"`
 	Prefix  string `json:"prefix"`
 }
 
-// Structure of IdeaNote
+type Help struct {
+	Command     string `json:"command"`
+	Usage       string `json:"usage"`
+	Description string `json:"description"`
+}
+
 type Note struct {
 	BoxNum    int    `gorm:"not null;"`
 	Author    string `gorm:"not null;type:varchar(30)"`
@@ -20,7 +24,6 @@ type Note struct {
 	Timestamp time.Time `gorm:"not null"`
 }
 
-// Structure of Idea Box
 type Box struct {
 	ID        int       `gorm:"not null"`
 	Text      string    `gorm:"type:varchar(50);"`

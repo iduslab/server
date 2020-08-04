@@ -86,5 +86,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		commands.AddMemo(s, m, args)
 	case "상자열기":
 		commands.PickMemo(s, m, args)
+	case "도움":
+		commands.Help(s, m, args)
 	}
 }

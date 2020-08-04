@@ -31,9 +31,9 @@ func AddMemo(s *discordgo.Session, m *discordgo.MessageCreate, args []string) {
 
 	switch args[1] {
 	case "익명":
-		anon = false
-	case "공개":
 		anon = true
+	case "공개":
+		anon = false
 	default:
 		embed.SendEmbed(embedUtil.ERR_REQUEST, "익명 여부는 익명/공개 둘중 하나로 적어주세요.")
 		return
