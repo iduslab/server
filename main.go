@@ -9,9 +9,9 @@ import (
 	"syscall"
 
 	"github.com/bwmarrin/discordgo"
-	"github.com/gangjun06/bot01/commands"
-	"github.com/gangjun06/bot01/db"
-	"github.com/gangjun06/bot01/utils"
+	"github.com/gangjun06/iduslab/commands"
+	"github.com/gangjun06/iduslab/db"
+	"github.com/gangjun06/iduslab/utils"
 )
 
 var prefix string

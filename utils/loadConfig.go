@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/gangjun06/bot01/structure"
+	"github.com/gangjun06/iduslab/structure"
 )
 
 var configLocal *structure.Config

@@ -3,11 +3,11 @@ package commands
 import (
 	"strconv"
 
-	"github.com/gangjun06/bot01/utils"
-	embedUtil "github.com/gangjun06/bot01/utils/embed"
+	"github.com/gangjun06/iduslab/utils"
+	embedUtil "github.com/gangjun06/iduslab/utils/embed"
 
 	"github.com/bwmarrin/discordgo"
-	"github.com/gangjun06/bot01/db"
+	"github.com/gangjun06/iduslab/db"
 )
 
 // PickMemo 상자열기 <상자id> [개수 (기본값=2)]>: 쪽지를 상자에서 몇개 꺼냅니다

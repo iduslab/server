@@ -1,4 +1,4 @@
-module github.com/gangjun06/bot01
+module github.com/gangjun06/iduslab
 
 go 1.14
 

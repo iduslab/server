@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/gangjun06/bot01/structure"
+	"github.com/gangjun06/iduslab/structure"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )

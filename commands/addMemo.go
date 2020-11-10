@@ -4,8 +4,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/gangjun06/bot01/db"
-	embedUtil "github.com/gangjun06/bot01/utils/embed"
+	"github.com/gangjun06/iduslab/db"
+	embedUtil "github.com/gangjun06/iduslab/utils/embed"
 
 	"github.com/bwmarrin/discordgo"
 )

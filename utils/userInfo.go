@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/gangjun06/bot01/structure"
+	"github.com/gangjun06/iduslab/structure"
 )
 
 func GetUserInfoByUserId(id string) (*structure.DiscordUser, error) {

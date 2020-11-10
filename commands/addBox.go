@@ -3,10 +3,10 @@ package commands
 import (
 	"strings"
 
-	"github.com/gangjun06/bot01/utils"
-	embedUtil "github.com/gangjun06/bot01/utils/embed"
+	"github.com/gangjun06/iduslab/utils"
+	embedUtil "github.com/gangjun06/iduslab/utils/embed"
 
-	"github.com/gangjun06/bot01/db"
+	"github.com/gangjun06/iduslab/db"
 
 	"github.com/bwmarrin/discordgo"
 )

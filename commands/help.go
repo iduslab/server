@@ -5,8 +5,8 @@ import (
 	"io/ioutil"
 
 	"github.com/bwmarrin/discordgo"
-	"github.com/gangjun06/bot01/structure"
-	embedUtil "github.com/gangjun06/bot01/utils/embed"
+	"github.com/gangjun06/iduslab/structure"
+	embedUtil "github.com/gangjun06/iduslab/utils/embed"
 )
 
 func Help(s *discordgo.Session, m *discordgo.MessageCreate, args []string) {
