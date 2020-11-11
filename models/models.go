@@ -9,6 +9,7 @@ import (
 type Config struct {
 	Server struct {
 		Debug bool
+		Port  int
 	}
 	Discord struct {
 		Token          string

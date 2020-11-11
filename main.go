@@ -5,14 +5,17 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"strconv"
 	"strings"
 	"syscall"
 
 	"github.com/bwmarrin/discordgo"
-	// "github.com/gangjun06/book-server/middlewares"
-	// v1 "github.com/gangjun06/book-server/routes/v1"
+	"github.com/gin-gonic/gin"
+
 	"github.com/gangjun06/iduslab/commands"
 	"github.com/gangjun06/iduslab/db"
+	"github.com/gangjun06/iduslab/middlewares"
+	"github.com/gangjun06/iduslab/routes"
 	"github.com/gangjun06/iduslab/utils"
 )
 
@@ -58,18 +61,17 @@ func InitBot() {
 }
 
 func InitServer() {
-	// config := utils.GetConfig().Server
-	// if config.Debug {
-	// 	gin.SetMode(gin.DebugMode)
-	// } else {
-	// 	gin.SetMode(gin.ReleaseMode)
-
-	// }
-	// r := gin.Default()
-	// r.Use(middlewares.Cors())
-	// version1 := r.Group("/v1")
-	// v1.InitRoutes(version1)
-	// r.Run(":" + strconv.Itoa(config.Port))
+	config := utils.Config().Server
+	if config.Debug {
+		gin.SetMode(gin.DebugMode)
+	} else {
+		gin.SetMode(gin.ReleaseMode)
+	}
+	r := gin.Default()
+	r.Use(middlewares.Cors())
+	version1 := r.Group("/v1")
+	routes.InitRoutes(version1)
+	r.Run(":" + strconv.Itoa(config.Port))
 }
 
 func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
