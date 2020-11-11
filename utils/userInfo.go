@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/gangjun06/iduslab/structure"
+	"github.com/gangjun06/iduslab/models"
 )
 
-func GetUserInfoByUserId(id string) (*structure.DiscordUser, error) {
+func GetUserInfoByUserId(id string) (*models.DiscordUser, error) {
 	req, err := http.NewRequest("GET", "https://discord.com/api/v6/users/"+id, nil)
 	if err != nil {
 		return nil, err
@@ -22,7 +22,7 @@ func GetUserInfoByUserId(id string) (*structure.DiscordUser, error) {
 	}
 	defer resp.Body.Close()
 
-	result := &structure.DiscordUser{}
+	result := &models.DiscordUser{}
 	json.NewDecoder(resp.Body).Decode(result)
 
 	return result, nil
