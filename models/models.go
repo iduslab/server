@@ -7,11 +7,17 @@ import (
 )
 
 type Config struct {
-	Token          string `json:"token"`
-	OwnerID        string `json:"ownerID"`
-	Prefix         string `json:"prefix"`
-	Mongodb        string `json:"mongodb"`
-	PermissionRole string `json:"permissionRole"`
+	Server struct {
+		Debug bool
+	}
+	Discord struct {
+		Token          string
+		PermissionRole string
+		Prefix         string
+	}
+	DB struct {
+		Mongodb string
+	}
 }
 
 type Help struct {

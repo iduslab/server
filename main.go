@@ -9,26 +9,38 @@ import (
 	"syscall"
 
 	"github.com/bwmarrin/discordgo"
+	// "github.com/gangjun06/book-server/middlewares"
+	// v1 "github.com/gangjun06/book-server/routes/v1"
 	"github.com/gangjun06/iduslab/commands"
 	"github.com/gangjun06/iduslab/db"
 	"github.com/gangjun06/iduslab/utils"
 )
 
 var prefix string
+var dg *discordgo.Session
 
 func main() {
+	utils.LoadConfig()
+	InitDB()
+	InitBot()
+	defer dg.Close()
 
-	config, loadConfigErr := utils.LoadConfig()
-	if loadConfigErr != nil {
-		log.Fatalln("Error While Loading Config File.\nMake sure config.json is located in the project root and written correctly." + loadConfigErr.Error())
-		return
-	}
+	fmt.Println("Bot is now running.  Press CTRL-C to exit.")
+	sc := make(chan os.Signal, 1)
+	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)
+	<-sc
+}
 
-	db.Init(config.Mongodb)
+func InitDB() {
+	db.Init(utils.Config().DB.Mongodb)
+}
+
+func InitBot() {
+	var err error
+	config := utils.Config().Discord
 
 	prefix = config.Prefix
-
-	dg, err := discordgo.New("Bot " + config.Token)
+	dg, err = discordgo.New("Bot " + config.Token)
 	if err != nil {
 		log.Fatalln("Error Creating Discord Session, " + err.Error())
 		return
@@ -43,14 +55,21 @@ func main() {
 		fmt.Println("error opening connection,", err)
 		return
 	}
+}
 
-	fmt.Println("Bot is now running.  Press CTRL-C to exit.")
-	sc := make(chan os.Signal, 1)
-	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)
-	<-sc
+func InitServer() {
+	// config := utils.GetConfig().Server
+	// if config.Debug {
+	// 	gin.SetMode(gin.DebugMode)
+	// } else {
+	// 	gin.SetMode(gin.ReleaseMode)
 
-	// Cleanly close down the Discord session.
-	dg.Close()
+	// }
+	// r := gin.Default()
+	// r.Use(middlewares.Cors())
+	// version1 := r.Group("/v1")
+	// v1.InitRoutes(version1)
+	// r.Run(":" + strconv.Itoa(config.Port))
 }
 
 func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {

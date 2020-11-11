@@ -1,26 +1,27 @@
 package utils
 
 import (
-	"encoding/json"
-	"fmt"
 	"io/ioutil"
+	"log"
 
+	"github.com/BurntSushi/toml"
 	"github.com/gangjun06/iduslab/models"
 )
 
 var configLocal *models.Config
 
 // LoadConfig And Save to global Variable
-func LoadConfig() (models.Config, error) {
-	jsonFile, errFailedToReadConfig := ioutil.ReadFile("config.json")
-	if errFailedToReadConfig != nil {
-		fmt.Println(errFailedToReadConfig)
+func LoadConfig() {
+	rawConfig, err := ioutil.ReadFile("config.toml")
+	if err != nil {
+		log.Fatalln("Failed to load config.")
 	}
-	fmt.Println("Successfully Opened config.json")
+
 	var config models.Config
-	errFailedToReadConfig = json.Unmarshal(jsonFile, &config)
+	if _, err := toml.Decode(string(rawConfig), &config); err != nil {
+		log.Fatalln("Failed to parsing config.")
+	}
 	configLocal = &config
-	return config, errFailedToReadConfig
 }
 
 // Config Get Anywhere

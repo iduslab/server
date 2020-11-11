@@ -14,11 +14,15 @@ func AddBox(s *discordgo.Session, m *discordgo.MessageCreate, args []string) {
 
 	e := embed.New(s, m.ChannelID, "상자추가")
 
+	hasPermission := false
 	for _, d := range m.Member.Roles {
-		if d != utils.Config().PermissionRole {
-			e.SendEmbed(embed.ERR_REQUEST, "상자를 추가할 권한이 없습니다")
-			return
+		if d == utils.Config().Discord.PermissionRole {
+			hasPermission = true
 		}
+	}
+	if !hasPermission {
+		e.SendEmbed(embed.ERR_REQUEST, "상자를 추가할 권한이 없습니다")
+		return
 	}
 
 	if len(args) < 2 {

@@ -13,7 +13,7 @@ func GetUserInfoByUserId(id string) (*models.DiscordUser, error) {
 		return nil, err
 	}
 
-	req.Header.Add("Authorization", "Bot "+Config().Token)
+	req.Header.Add("Authorization", "Bot "+Config().Discord.Token)
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
