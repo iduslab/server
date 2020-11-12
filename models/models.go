@@ -15,6 +15,9 @@ type Config struct {
 		Token          string
 		PermissionRole string
 		Prefix         string
+		ServerID       string
+		ClientID       string
+		ClientSecret   string
 	}
 	DB struct {
 		Mongodb string

@@ -18,7 +18,6 @@ import (
 var db *mongo.Database
 
 func Init(connectionURL string) {
-	fmt.Println(connectionURL)
 	clientOptions := options.Client().ApplyURI(connectionURL)
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {

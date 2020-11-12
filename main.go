@@ -3,11 +3,8 @@ package main
 import (
 	"fmt"
 	"log"
-	"os"
-	"os/signal"
 	"strconv"
 	"strings"
-	"syscall"
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/gin-gonic/gin"
@@ -28,10 +25,7 @@ func main() {
 	InitBot()
 	defer dg.Close()
 
-	fmt.Println("Bot is now running.  Press CTRL-C to exit.")
-	sc := make(chan os.Signal, 1)
-	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)
-	<-sc
+	InitServer()
 }
 
 func InitDB() {
@@ -58,6 +52,8 @@ func InitBot() {
 		fmt.Println("error opening connection,", err)
 		return
 	}
+
+	utils.SetBotSession(dg)
 }
 
 func InitServer() {
