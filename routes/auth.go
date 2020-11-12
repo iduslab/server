@@ -1,10 +1,10 @@
 package routes
 
 import (
-	c "github.com/gangjun06/iduslab/controllers/auth"
-	m "github.com/gangjun06/iduslab/middlewares"
-	"github.com/gangjun06/iduslab/models/req"
 	"github.com/gin-gonic/gin"
+	c "github.com/iduslab/backend/controllers/auth"
+	m "github.com/iduslab/backend/middlewares"
+	"github.com/iduslab/backend/models/req"
 )
 
 func setAuthRoutes(r *gin.RouterGroup) {

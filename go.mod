@@ -1,4 +1,4 @@
-module github.com/gangjun06/iduslab
+module github.com/iduslab/backend
 
 go 1.14
 

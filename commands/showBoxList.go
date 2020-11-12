@@ -4,8 +4,8 @@ import (
 	"strconv"
 
 	"github.com/bwmarrin/discordgo"
-	"github.com/gangjun06/iduslab/db"
-	"github.com/gangjun06/iduslab/utils/embed"
+	"github.com/iduslab/backend/db"
+	"github.com/iduslab/backend/utils/embed"
 )
 
 // ShowBoxList 현제 생성된 상자들의 목록을 보여줍니다

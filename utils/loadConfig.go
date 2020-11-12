@@ -5,7 +5,7 @@ import (
 	"log"
 
 	"github.com/BurntSushi/toml"
-	"github.com/gangjun06/iduslab/models"
+	"github.com/iduslab/backend/models"
 )
 
 var configLocal *models.Config

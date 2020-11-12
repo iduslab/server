@@ -9,9 +9,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/gangjun06/iduslab/models/req"
-	"github.com/gangjun06/iduslab/utils"
-	"github.com/gangjun06/iduslab/utils/res"
+	"github.com/iduslab/backend/models/req"
+	"github.com/iduslab/backend/utils"
+	"github.com/iduslab/backend/utils/res"
 	"github.com/gin-gonic/gin"
 )
 

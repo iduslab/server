@@ -9,11 +9,11 @@ import (
 	"github.com/bwmarrin/discordgo"
 	"github.com/gin-gonic/gin"
 
-	"github.com/gangjun06/iduslab/commands"
-	"github.com/gangjun06/iduslab/db"
-	"github.com/gangjun06/iduslab/middlewares"
-	"github.com/gangjun06/iduslab/routes"
-	"github.com/gangjun06/iduslab/utils"
+	"github.com/iduslab/backend/commands"
+	"github.com/iduslab/backend/db"
+	"github.com/iduslab/backend/middlewares"
+	"github.com/iduslab/backend/routes"
+	"github.com/iduslab/backend/utils"
 )
 
 var prefix string

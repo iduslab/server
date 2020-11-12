@@ -4,9 +4,9 @@ import (
 	"strings"
 
 	"github.com/bwmarrin/discordgo"
-	"github.com/gangjun06/iduslab/db"
-	"github.com/gangjun06/iduslab/utils"
-	"github.com/gangjun06/iduslab/utils/embed"
+	"github.com/iduslab/backend/db"
+	"github.com/iduslab/backend/utils"
+	"github.com/iduslab/backend/utils/embed"
 )
 
 // AddBox 쪽지를 담을 상자를 추가합니다

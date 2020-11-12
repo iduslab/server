@@ -1,7 +1,7 @@
 package middlewares
 
 import (
-	"github.com/gangjun06/iduslab/utils/res"
+	"github.com/iduslab/backend/utils/res"
 	"github.com/gin-gonic/gin"
 )
 

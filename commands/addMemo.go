@@ -4,8 +4,8 @@ import (
 	"strings"
 
 	"github.com/bwmarrin/discordgo"
-	"github.com/gangjun06/iduslab/db"
-	"github.com/gangjun06/iduslab/utils/embed"
+	"github.com/iduslab/backend/db"
+	"github.com/iduslab/backend/utils/embed"
 )
 
 func AddMemo(s *discordgo.Session, m *discordgo.MessageCreate, args []string) {

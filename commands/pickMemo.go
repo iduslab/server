@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/gangjun06/iduslab/utils/embed"
+	"github.com/iduslab/backend/utils/embed"
 
 	"github.com/bwmarrin/discordgo"
-	"github.com/gangjun06/iduslab/db"
+	"github.com/iduslab/backend/db"
 )
 
 // PickMemo 상자열기 <상자id> [개수 (기본값=2)]>: 쪽지를 상자에서 몇개 꺼냅니다

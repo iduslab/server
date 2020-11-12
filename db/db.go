@@ -10,7 +10,7 @@ import (
 
 	"go.mongodb.org/mongo-driver/bson"
 
-	"github.com/gangjun06/iduslab/models"
+	"github.com/iduslab/backend/models"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
