@@ -45,10 +45,9 @@ type Box struct {
 	Timestamp   time.Time          `bson:"timestamp,omitempty"`
 }
 
-type DiscordUser struct {
-	ID            string `json:"id"`
-	Username      string `json:"username"`
-	Avatar        string `json:"avatar"`
-	Discriminator string `json:"discriminator"`
-	PublicFlags   string `json:"public_flags"`
+type Setting struct {
+	ID          primitive.ObjectID `bson:"_id,omitempty"`
+	Name        string             `bson:"name,omitempty"`
+	Description string             `bson:"description,omitempty"`
+	Value       string             `bson:"value,omitempty"`
 }
