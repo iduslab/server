@@ -9,5 +9,6 @@ import (
 
 func setAuthRoutes(r *gin.RouterGroup) {
 	r.GET("/link", m.VerifyQuery(&req.AuthURL{}), c.AuthURL)
-	r.GET("/auth", m.VerifyQuery(&req.Auth{}), c.Auth)
+	r.GET("/", m.VerifyQuery(&req.Auth{}), c.Auth)
+	r.POST("/token", m.VerifyQuery(&req.AuthToken{}), c.SignInToken)
 }
