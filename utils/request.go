@@ -2,6 +2,8 @@ package utils
 
 import (
 	"encoding/json"
+	"errors"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -14,7 +16,7 @@ import (
 func DiscordUsersMe(accessToken string) (*models.DiscordUser, error) {
 	client := &http.Client{}
 	req, _ := http.NewRequest(http.MethodGet, "https://discord.com/api/v6/users/@me", nil)
-	req.Header.Add("Authorization", " Barer "+accessToken)
+	req.Header.Add("Authorization", "Bearer "+accessToken)
 
 	resp, err := client.Do(req)
 	if err != nil {
@@ -33,7 +35,8 @@ func DiscordUsersMe(accessToken string) (*models.DiscordUser, error) {
 	}
 
 	if resp.StatusCode != 200 {
-		return &result, err
+		fmt.Println(resp.StatusCode)
+		return &result, errors.New("request error")
 	}
 
 	return &result, err

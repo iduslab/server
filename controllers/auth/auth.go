@@ -37,6 +37,8 @@ func SignInToken(c *gin.Context) {
 	body := c.MustGet("body").(*req.AuthToken)
 
 	if user, err := utils.DiscordUsersMe(body.AccessToken); err == nil {
+		fmt.Println(user)
+		fmt.Println(err)
 		if hasPermission, err := utils.HasPermission(user.ID); err == nil {
 			r.Response(res.R{
 				"access_token":  body.AccessToken,
@@ -44,7 +46,7 @@ func SignInToken(c *gin.Context) {
 				"is_admin":      hasPermission,
 			})
 		} else {
-			r.SendError(res.ERR_SERVER, "")
+			r.SendError(res.ERR_SERVER, err.Error())
 		}
 		return
 	}
