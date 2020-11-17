@@ -49,5 +49,5 @@ type Setting struct {
 	ID          primitive.ObjectID `bson:"_id,omitempty"`
 	Name        string             `bson:"name,omitempty"`
 	Description string             `bson:"description,omitempty"`
-	Value       string             `bson:"value,omitempty"`
+	Value       interface{}        `bson:"value,omitempty"`
 }

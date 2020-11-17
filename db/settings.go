@@ -38,7 +38,7 @@ func GetAllSetting() (*[]models.Setting, error) {
 	return &data, nil
 }
 
-func GetSetting(name string) (string, error) {
+func GetSetting(name string) (interface{}, error) {
 	var data models.Setting
 	filter := models.Setting{Name: name}
 	err := db.Collection("setting").FindOne(context.TODO(), filter).Decode(&data)
