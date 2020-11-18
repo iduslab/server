@@ -1,0 +1,40 @@
+name: Deploy To Server
+on:
+  push:
+    branches:
+      - master
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Setup Golang
+        uses: actions/setup-go@v2
+        with:
+          go-version: "^1.14.6"
+      - name: Build File
+        run: env GOOS=linux GOARCH=arm GOARM=5 go build
+      - name: write config file
+        run: echo '${{ secrets.CONFIG }}' >> config.toml
+      - name: copy file via ssh password
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          source: "./backend"
+          target: "api.iduslab.xyz"
+      - name: Setting to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd api.iduslab.xyz
+            rm main
+            [ -e file ] && rm file
+            mv backend main
+            if [[ $(pm2 list | grep api.iduslab.xyz) ]]; then pm2 restart api.iduslab.xyz; else pm2 start ./main -n api.iduslab.xyz; fi
