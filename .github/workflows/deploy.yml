@@ -34,7 +34,6 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd api.iduslab.xyz
-            rm main
-            [ -e file ] && rm file
+            [ -e main ] && rm main
             mv backend main
             if [[ $(pm2 list | grep api.iduslab.xyz) ]]; then pm2 restart api.iduslab.xyz; else pm2 start ./main -n api.iduslab.xyz; fi
