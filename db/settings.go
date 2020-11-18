@@ -21,7 +21,7 @@ func AddSetting(name, description, value string) error {
 }
 
 func UpdateSettingValue(name, value string) error {
-	_, err := db.Collection("setting").UpdateOne(context.TODO(), bson.D{primitive.E{Key: "name", Value: name}}, bson.D{primitive.E{Key: "value", Value: value}})
+	_, err := db.Collection("setting").UpdateOne(context.TODO(), bson.M{"name": name}, bson.D{primitive.E{Key: "$set", Value: bson.D{primitive.E{Key: "value", Value: value}}}})
 	return err
 }
 
@@ -38,7 +38,7 @@ func GetAllSetting() (*[]models.Setting, error) {
 	return &data, nil
 }
 
-func GetSetting(name string) (interface{}, error) {
+func GetSetting(name string) (string, error) {
 	var data models.Setting
 	filter := models.Setting{Name: name}
 	err := db.Collection("setting").FindOne(context.TODO(), filter).Decode(&data)

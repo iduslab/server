@@ -26,12 +26,11 @@ func HasPermission(user_id string) (bool, error) {
 	if err != nil {
 		return false, err
 	}
-	ivalue, err := db.GetSetting("permissionID")
+	value, err := db.GetSetting("permissionID")
 	if err != nil {
 		return false, err
 	}
 
-	value := ivalue.(string)
 	hasPermission := false
 	for _, d := range user.Roles {
 		if d == value {

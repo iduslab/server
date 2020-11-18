@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/gin-contrib/cors"
+	"github.com/iduslab/backend/middlewares"
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/gin-gonic/gin"
@@ -65,8 +65,8 @@ func InitServer() {
 		gin.SetMode(gin.ReleaseMode)
 	}
 	r := gin.Default()
-	// r.Use(middlewares.Cors())
-	r.Use(cors.Default())
+	r.Use(middlewares.Cors())
+	// r.Use(cors.Default())
 	version1 := r.Group("/v1")
 	routes.InitRoutes(version1)
 	r.Run(":" + strconv.Itoa(config.Port))

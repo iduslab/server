@@ -38,7 +38,7 @@ func UpdateValue(c *gin.Context) {
 	body := c.MustGet("body").(*req.SettingUpdateValue)
 	err := db.UpdateSettingValue(name, body.Value)
 	if err != nil {
-		r.SendError(res.ERR_SERVER, "")
+		r.SendError(res.ERR_SERVER, err.Error())
 		return
 	}
 	r.Response(res.R{})
