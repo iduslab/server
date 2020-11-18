@@ -1,8 +1,8 @@
 package middlewares
 
 import (
-	"github.com/iduslab/backend/utils/res"
 	"github.com/gin-gonic/gin"
+	"github.com/iduslab/backend/utils/res"
 )
 
 func VerifyRequest(data interface{}) gin.HandlerFunc {

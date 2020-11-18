@@ -13,6 +13,7 @@ const (
 	ERR_SERVER
 	ERR_DUPLICATE
 	ERR_AUTH
+	ERR_PERMISSION
 )
 
 func (r *res) SendError(errType ErrType, text string) {
@@ -33,6 +34,8 @@ func (r *res) SendError(errType ErrType, text string) {
 		set("ERR_DUPLICATE", http.StatusConflict)
 	case ERR_AUTH:
 		set("ERR_AUTH", http.StatusUnauthorized)
+	case ERR_PERMISSION:
+		set("ERR_PERMISSION", http.StatusForbidden)
 	}
 
 	r.c.JSON(Status, gin.H{

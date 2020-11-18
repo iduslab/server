@@ -46,8 +46,8 @@ type Box struct {
 }
 
 type Setting struct {
-	ID          primitive.ObjectID `bson:"_id,omitempty"`
-	Name        string             `bson:"name,omitempty"`
-	Description string             `bson:"description,omitempty"`
-	Value       interface{}        `bson:"value,omitempty"`
+	ID          primitive.ObjectID `bson:"_id,omitempty" json:"id"`
+	Name        string             `bson:"name,omitempty" json:"name"`
+	Description string             `bson:"description,omitempty" json:"description"`
+	Value       interface{}        `bson:"value,omitempty" json:"value"`
 }
