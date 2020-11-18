@@ -13,9 +13,7 @@ jobs:
         with:
           go-version: "^1.14.6"
       - name: Build File
-        run: env GOOS=linux GOARCH=arm GOARM=5 go build
-      - name: write config file
-        run: echo '${{ secrets.CONFIG }}' >> config.toml
+        run: GOOS=linux GOARCH=amd64 go build
       - name: copy file via ssh password
         uses: appleboy/scp-action@master
         with:
