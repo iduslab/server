@@ -3,8 +3,10 @@ package main
 import (
 	"fmt"
 	"log"
+	"math/rand"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/iduslab/backend/middlewares"
 
@@ -21,6 +23,7 @@ var prefix string
 var dg *discordgo.Session
 
 func main() {
+	rand.Seed(time.Now().UnixNano())
 	utils.LoadConfig()
 	InitDB()
 	InitBot()
@@ -101,6 +104,8 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		commands.AddMemo(s, m, args)
 	case "상자열기":
 		commands.PickMemo(s, m, args)
+	case "워터마크":
+		commands.WaterMark(s, m, args)
 	case "도움":
 		commands.Help(s, m, args)
 	}

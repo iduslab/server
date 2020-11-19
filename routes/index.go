@@ -7,4 +7,5 @@ import (
 func InitRoutes(r *gin.RouterGroup) {
 	setAuthRoutes(r.Group("auth"))
 	setSettingRoutes(r.Group("setting"))
+	setUtilRoutes(r.Group("util"))
 }

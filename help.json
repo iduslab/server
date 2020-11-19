@@ -18,5 +18,10 @@
     "command": "상자열기",
     "usage": "<상자이름> <개수>",
     "description": "쪽지를 상자에서 몇개 꺼냅니다"
+  },
+  {
+    "command": "워터마크",
+    "usage": "<글자> <색상 (예: #ffffff)>",
+    "description": "이미지에 워터마크를 삽입합니다."
   }
 ]

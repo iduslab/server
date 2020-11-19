@@ -7,6 +7,8 @@ require (
 	github.com/bwmarrin/discordgo v0.22.0
 	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-gonic/gin v1.6.3
+	github.com/h2non/bimg v1.1.4
 	github.com/jinzhu/gorm v1.9.16
 	go.mongodb.org/mongo-driver v1.4.3
+	gonum.org/v1/plot v0.8.1
 )

@@ -18,3 +18,5 @@ config.json
 data.db
 main
 config.toml
+
+temp
