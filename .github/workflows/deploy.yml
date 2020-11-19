@@ -15,7 +15,7 @@ jobs:
       - name: Install Vips
         run: |
           wget https://github.com/libvips/libvips/releases/download/v8.10.2/vips-8.10.2.tar.gz
-          tar xf vips-8.10.2.tar.gz
+          tar xf vips-8.10.2.tar.gz vips-8.10.2/
           cd vips-8.10.2.tar.gz
           ./configure
           make
