@@ -6,14 +6,17 @@ import (
 	"io/ioutil"
 	"net/http"
 
+	"github.com/iduslab/backend/models/req"
+
 	"github.com/gin-gonic/gin"
 	"github.com/iduslab/backend/db"
-	"github.com/iduslab/backend/models"
 	"github.com/iduslab/backend/utils/res"
 )
 
 func SendNotice(c *gin.Context) {
 	r := res.New(c)
+
+	body := c.MustGet("body").(*req.UtilSendNotice)
 
 	value, err := db.GetSetting("noticeWebhook")
 	if err != nil {
@@ -21,11 +24,7 @@ func SendNotice(c *gin.Context) {
 		return
 	}
 
-	data := models.DiscordWebhook{
-		Content: "asdf",
-	}
-
-	dataByte, err := json.Marshal(&data)
+	dataByte, err := json.Marshal(&body.Content)
 	if err != nil {
 		r.SendError(res.ERR_SERVER, err.Error())
 		return
@@ -35,6 +34,7 @@ func SendNotice(c *gin.Context) {
 
 	client := &http.Client{}
 	req, _ := http.NewRequest(http.MethodPost, value, reqBody)
+	req.Header.Add("Content-Type", "application/json")
 
 	resp, err := client.Do(req)
 	if err != nil {
