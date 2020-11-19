@@ -12,11 +12,15 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: "^1.14.6"
-      - name: Install Dependency
+      - name: Install Vips
         run: |
-          sudo apt-get install build-essential pkg-config glib2.0-dev libxml2-dev 
-          sudo apt-get install libvips
-          sudo apt-get install libvips-tools
+          git clone git://github.com/jcupitt/libvips.git
+          cd libvips
+          ./autogen.sh
+          make
+          sudo make install
+          sudo ldconfig
+          cd ..
       - name: Build File
         run: GOOS=linux GOARCH=amd64 go build
       - name: copy file via ssh password
