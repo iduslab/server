@@ -14,10 +14,10 @@ jobs:
           go-version: "^1.14.6"
       - name: Install Vips
         run: |
-          sudo apt-get install gtk-doc-tools
-          git clone git://github.com/jcupitt/libvips.git
-          cd libvips
-          ./autogen.sh
+          wget https://github.com/libvips/libvips/releases/download/v8.10.2/vips-8.10.2.tar.gz
+          tar xf vips-8.10.2.tar.gz
+          cd vips-8.10.2.tar.gz
+          ./configure
           make
           sudo make install
           sudo ldconfig
