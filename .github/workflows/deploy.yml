@@ -14,8 +14,8 @@ jobs:
           go-version: "^1.14.6"
       - name: Install Dependency
         run: |
-        sudo apt-get install build-essential pkg-config glib2.0-dev libxml2-dev 
-        sudo apt-get install libvips
+          sudo apt-get install build-essential pkg-config glib2.0-dev libxml2-dev 
+          sudo apt-get install libvips
       - name: Build File
         run: GOOS=linux GOARCH=amd64 go build
       - name: copy file via ssh password
