@@ -47,12 +47,13 @@ func InitBot() {
 		return
 	}
 
+	dg.AddHandler(botReady)
 	dg.AddHandler(messageCreate)
+	dg.AddHandler(guildMemeberAdd)
 
-	dg.Identify.Intents = discordgo.MakeIntent(discordgo.IntentsGuildMessages)
+	dg.Identify.Intents = discordgo.MakeIntent(discordgo.IntentsGuildMessages | discordgo.IntentsGuildMembers)
 
-	err = dg.Open()
-	if err != nil {
+	if err := dg.Open(); err != nil {
 		fmt.Println("error opening connection,", err)
 		return
 	}
@@ -73,6 +74,19 @@ func InitServer() {
 	version1 := r.Group("/v1")
 	routes.InitRoutes(version1)
 	r.Run(":" + strconv.Itoa(config.Port))
+}
+
+func botReady(s *discordgo.Session, event *discordgo.Ready) {
+	fmt.Println("Successful to start bot")
+	if err := s.UpdateStatus(0, utils.Config().Discord.Prefix+"도움"); err != nil {
+		fmt.Println(err)
+	}
+}
+
+func guildMemeberAdd(s *discordgo.Session, event *discordgo.GuildMemberAdd) {
+	db.GetSetting("")
+	s.ChannelMessageSend("775651693097648130", "asdf")
+	fmt.Println(event.Mention)
 }
 
 func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {

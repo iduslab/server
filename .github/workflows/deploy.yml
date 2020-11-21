@@ -12,16 +12,6 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: "^1.14.6"
-      - name: Install Vips
-        run: |
-          wget https://github.com/libvips/libvips/releases/download/v8.10.2/vips-8.10.2.tar.gz
-          tar xf vips-8.10.2.tar.gz vips-8.10.2/
-          cd vips-8.10.2
-          ./configure
-          make
-          sudo make install
-          sudo ldconfig
-          cd ..
       - name: Build File
         run: GOOS=linux GOARCH=amd64 go build
       - name: copy file via ssh password
