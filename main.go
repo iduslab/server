@@ -50,8 +50,9 @@ func InitBot() {
 	dg.AddHandler(botReady)
 	dg.AddHandler(messageCreate)
 	dg.AddHandler(guildMemeberAdd)
+	dg.AddHandler(guildMemeberRemove)
 
-	dg.Identify.Intents = discordgo.MakeIntent(discordgo.IntentsGuildMessages | discordgo.IntentsGuildMembers)
+	dg.Identify.Intents = discordgo.MakeIntent(discordgo.IntentsGuildMessages | discordgo.IntentsGuildMembers | discordgo.IntentsDirectMessages)
 
 	if err := dg.Open(); err != nil {
 		fmt.Println("error opening connection,", err)
@@ -84,9 +85,27 @@ func botReady(s *discordgo.Session, event *discordgo.Ready) {
 }
 
 func guildMemeberAdd(s *discordgo.Session, event *discordgo.GuildMemberAdd) {
-	db.GetSetting("")
-	s.ChannelMessageSend("775651693097648130", "asdf")
-	fmt.Println(event.Mention)
+	message, _ := db.GetSetting("welcome")
+	channelID, _ := db.GetSetting("welcomeChannelID")
+	if channelID == "" {
+		return
+	}
+
+	message = strings.ReplaceAll(message, "{mention}", event.Member.Mention())
+
+	s.ChannelMessageSend(channelID, message)
+}
+
+func guildMemeberRemove(s *discordgo.Session, event *discordgo.GuildMemberRemove) {
+	message, _ := db.GetSetting("bye")
+	channelID, _ := db.GetSetting("byeChannelID")
+	if channelID == "" {
+		return
+	}
+
+	message = strings.ReplaceAll(message, "{mention}", event.Member.Mention())
+
+	s.ChannelMessageSend(channelID, message)
 }
 
 func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
