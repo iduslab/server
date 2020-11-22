@@ -49,6 +49,8 @@ func Hex2RGB(hex string) (*color.RGBA, error) {
 	return &color.RGBA{uint8(values >> 16), uint8((values >> 8) & 0xFF), uint8(values & 0xFF), 0}, nil
 }
 
+// refference  https://gist.github.com/linw1995/41e103f29e7dd97679c577a6f4830be8
+
 // WaterMark for adding a watermark on the image
 func WaterMark(imgReader io.Reader, markText string, color *color.RGBA) (image.Image, error) {
 	img, _, err := image.Decode(imgReader)
