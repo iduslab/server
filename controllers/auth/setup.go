@@ -43,7 +43,7 @@ func Setup(c *gin.Context) {
 	user := c.MustGet("user").(*models.DiscordUser)
 
 	introduceChannelID, _ := db.GetSetting("introduceChannelID")
-	guildID, _ := db.GetSetting("guildID")
+	guildID := utils.Config().Discord.ServerID
 	memberRoleID, _ := utils.GetMemberRole()
 	utils.Session().ChannelMessageSend(introduceChannelID, fmt.Sprintf("별명: %s\n가입경로: %s\n서버에서 하고싶은것: %s\n하고싶은말: %s\n", body.NickName, body.JoinWith, body.WantToDo, body.Message))
 	utils.Session().GuildMemberRoleAdd(guildID, user.ID, memberRoleID)
