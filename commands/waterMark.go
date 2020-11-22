@@ -2,6 +2,8 @@ package commands
 
 import (
 	"fmt"
+	"net/http"
+	"path"
 	"strings"
 
 	"github.com/iduslab/backend/utils"
@@ -27,36 +29,39 @@ func WaterMark(s *discordgo.Session, m *discordgo.MessageCreate, args []string) 
 		return
 	}
 
-	// colorR, colorG, colorB, err := utils.Hex2RGB(strings.TrimLeft(args[1], "#"))
-	// if err != nil {
-	// 	e.SendEmbed(embed.ERR_REQUEST, "색상이 올바르지 않습니다")
-	// 	return
-	// }
-
-	fileNameSpilit := strings.Split(m.Attachments[0].Filename, ".")
-	fileNameSpilitLength := len(fileNameSpilit)
-	if fileNameSpilitLength < 2 {
-		e.SendEmbed(embed.ERR_REQUEST, "확장자가 올바르지 않습니다.")
+	color, err := utils.Hex2RGB(strings.TrimLeft(args[1], "#"))
+	if err != nil {
+		e.SendEmbed(embed.ERR_REQUEST, "색상이 올바르지 않습니다")
 		return
 	}
-	fileExtension := fileNameSpilit[fileNameSpilitLength-1]
 
-	if fileExtension == "png" || fileExtension == "svg" {
+	fileExt := path.Ext(m.Attachments[0].Filename)
+
+	if !(fileExt == ".jpg" || fileExt == ".jpeg" || fileExt == ".png") {
 		e.SendEmbed(embed.ERR_REQUEST, "해당 포멧의 이미지는 지원하지 않습니다")
 		return
 	}
 
-	filePath := fmt.Sprintf("temp/%s.%s", m.Attachments[0].ID, fileExtension)
+	response, err := http.Get(m.Attachments[0].URL)
+	if err != nil {
+		e.SendEmbed(embed.ERR_BOT, "사진처리중 문제가 발생하였습니다.")
+		return
+	}
+	defer response.Body.Close()
 
-	if err := utils.DownloadImageViaURL(m.Attachments[0].URL, filePath); err != nil {
+	color.A = 77
+	img, err := utils.WaterMark(response.Body, args[0], color)
+	if err != nil {
+		panic(err)
+	}
+
+	buff, err := utils.ImageEncode(img, fileExt)
+	if err != nil {
 		fmt.Println(err.Error())
 		e.SendEmbed(embed.ERR_BOT, "사진처리중 문제가 발생하였습니다.")
 		return
 	}
 
-	e.SendEmbed(embed.ERR_BOT, "사진처리중 문제가 발생하였습니다.")
-	return
-
-	// s.ChannelFileSend(m.ChannelID, m.Attachments[0].ID+"."+fileExtension, r)
+	s.ChannelFileSend(m.ChannelID, m.Attachments[0].ID+fileExt, buff)
 
 }
