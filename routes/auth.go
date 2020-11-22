@@ -11,4 +11,7 @@ func setAuthRoutes(r *gin.RouterGroup) {
 	r.GET("/link", m.VerifyQuery(&req.AuthURL{}), c.AuthURL)
 	r.GET("/", m.VerifyQuery(&req.Auth{}), c.Auth)
 	r.POST("/token", m.VerifyRequest(&req.AuthToken{}), c.SignInToken)
+	r.POST("/setup", m.CheckAuth(), m.VerifyRequest(&req.AuthSetup{}), c.Setup)
+	r.GET("/ismember", m.CheckAuth(), c.IsMember)
+	r.GET("/roles", c.Roles)
 }

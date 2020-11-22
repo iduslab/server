@@ -51,3 +51,8 @@ type Setting struct {
 	Description string             `bson:"description,omitempty" json:"description"`
 	Value       string             `bson:"value,omitempty" json:"value"`
 }
+
+type Role struct {
+	Name   string `json:"name"`
+	RoleID string `json:"role_id"`
+}

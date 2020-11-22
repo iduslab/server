@@ -14,3 +14,11 @@ type AuthToken struct {
 type AuthURL struct {
 	RedirectUri string `form:"redirect_uri"`
 }
+
+type AuthSetup struct {
+	NickName string   `json:"nickname"`
+	JoinWith string   `json:"join_with"`
+	WantToDo string   `json:"want_to_do"`
+	Message  string   `json:"message"`
+	Roles    []string `json:"roles"`
+}
